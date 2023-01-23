@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <title>Generate Joke</title>
+</head>
+<body>
+    <div class="card" style="width: 20rem; margin: auto;">
+        <div class="card-header">
+            Random Joke
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Ready?</h5>
+            <p class="card-text" id="jkSetup"></p>
+            <a href="#" class="btn btn-primary" id="generate">Show punchline</a>
+            <a href="./index.html" class="btn btn-secondary" id="newJoke">Next Joke</a>
+        </div>
+    </div>
+
+    <!-- <p id="demo"></p> -->
+</body>
+<script>
+    
+    const newJoke = document.getElementById("newJoke");
+    getURL("https://official-joke-api.appspot.com/random_joke");
+
+    async function getURL(url) {
+
+        let api = await fetch(url);
+        let query = await api.json();
+
+        document.getElementById("jkSetup").innerHTML = query.setup;
+
+        let generate = document.getElementById("generate");
+        let newJoke = document.getElementById("newJoke");
+
+        generate.addEventListener('click', () => {
+            alert(query.punchline);
+        })
+
+    }
+
+</script>
+</html>
